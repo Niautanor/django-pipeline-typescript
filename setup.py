@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
   name='django-pipeline-typescript',
   packages=['pipeline_typescript'],
-  version='0.3',
+  version='0.4',
   description='Django Pipeline Compiler for Typescript',
   author='Bogdan I. Bursuc',
   author_email='bogdanbursuc86@gmail.com',
@@ -11,7 +11,7 @@ setup(
   download_url='https://github.com/Bogh/django-pipeline-typescript/tarball/0.2',  # I'll explain this in a second
   keywords=['pipeline', 'assets', 'typescript'],  # arbitrary keywords
   classifiers=[
-    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3.5",
     "Framework :: Django",
     "License :: OSI Approved :: MIT License",
     "Intended Audience :: Developers",

@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
 
-from django.conf import settings as _settings
+from django.conf import settings
 from pipeline.compilers import SubProcessCompiler
 
 DEFAULTS = {
-    'PIPELINE_TYPESCRIPT_BINARY': ('/usr/bin/env', 'tsc'),
-    'PIPELINE_TYPESCRIPT_ARGUMENTS': (None,)
+    'TYPESCRIPT_BINARY': ('/usr/bin/env', 'tsc'),
+    'TYPESCRIPT_ARGUMENTS': (None,)
 }
 
 
@@ -18,11 +18,12 @@ class TypescriptCompiler(SubProcessCompiler):
     def compile_file(self, infile, outfile, outdated=False, force=False):
         if not outdated and not force:
             return
+        _settings = getattr(settings, 'PIPELINE', DEFAULTS)
         command = (
-            settings.get('PIPELINE_TYPESCRIPT_BINARY',
-                         DEFAULTS["PIPELINE_TYPESCRIPT_BINARY"]),
-            settings.get('PIPELINE_TYPESCRIPT_ARGUMENTS',
-                         DEFAULTS["PIPELINE_TYPESCRIPT_ARGUMENTS"]),
+            getattr(_settings, 'TYPESCRIPT_BINARY',
+                                DEFAULTS["TYPESCRIPT_BINARY"]),
+            getattr(_settings, 'TYPESCRIPT_ARGUMENTS',
+                               DEFAULTS["TYPESCRIPT_ARGUMENTS"]),
             infile,
             )
         return self.execute_command(command)
